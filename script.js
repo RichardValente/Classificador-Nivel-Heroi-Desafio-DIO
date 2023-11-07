@@ -1,11 +1,19 @@
-const prompt = require('prompt-sync')();
+var nome = document.getElementById('nomeHeroi');
+var exp = document.querySelector('#expHeroi');
+var botao = document.getElementById('botao');
+var nivel="";
 
-var nome = "";
-var exp = 0;
-var nivel;
-var num = 1;
+function informaResultado(nivel){
 
-function verificador(nome , exp){
+  var seccao = document.querySelector('#container');
+  var div = document.createElement("div");
+  div.setAttribute("Class", "resultado");
+  div.innerHTML = "O Heroi " + nome.value + " está no nível " + nivel;
+  seccao.appendChild(div);
+}
+
+function verificador(){
+  exp = parseInt(exp.value);
   if (exp <= 1000) {
     nivel = "Ferro";
   } else if (exp <= 2000) {
@@ -19,26 +27,15 @@ function verificador(nome , exp){
   } else if (exp <= 9000) {
     nivel = "Ascendente";
   } else if (exp <= 10000) {
-    nivel = "Imortal";
+    nivel = "Imortal";  
   } else {
     nivel = "Raridade";
   }
 
-  console.log(`o Heroi : ` + nome + ` está no nível ` + nivel);
+  informaResultado(nivel);
 
 }
 
-while(num != 0){
-  console.clear
-  console.log("Classificador de Nível");
-  
-  nome = prompt("Digite o nome do heroi: ");
-  exp = parseInt(prompt("Digite a experiencia do heroi: "));
-
-  verificador(nome, exp)
-
-  console.log("Deseja continuar?")
-  console.log("0 - SAIR / 1 - CONTINUAR")
-  num = parseInt("Continuar?")
-  
-}
+botao.addEventListener("click", function(){
+  verificador()
+});
